@@ -12,12 +12,9 @@ static std::atomic<std::size_t> view_counter{};
 
 constexpr std::string_view kPageHeader = R"HTML(<!doctype html>
 <html lang="en">
-<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>James Lim</title>
-</head>
-<body>
 <h1>James Lim</h1>
 <p>I write C++</p>
 <p>
@@ -27,7 +24,6 @@ constexpr std::string_view kPageHeader = R"HTML(<!doctype html>
 <p>)HTML";
 
 constexpr std::string_view kPageTail = R"HTML( views since server restarted.</p>
-</body>
 </html>)HTML";
 
 namespace {
