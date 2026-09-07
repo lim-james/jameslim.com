@@ -1,0 +1,12 @@
+# build output
+main
+main.new
+*.o
+*.d
+
+# editor / OS
+*.swp
+*~
+.vscode/
+.idea/
+.DS_Store
