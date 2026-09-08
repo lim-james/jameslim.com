@@ -6,11 +6,8 @@
 #include <string>
 #include <string_view>
 #include <thread>
-#include <atomic>
 
-static std::atomic<std::size_t> view_counter{};
-
-constexpr std::string_view kPageHeader = R"HTML(<!doctype html>
+constexpr std::string_view kPage = R"HTML(<!doctype html>
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,9 +18,6 @@ constexpr std::string_view kPageHeader = R"HTML(<!doctype html>
 <a href="https://github.com/lim-james">GitHub</a> &middot;
 <a href="https://www.linkedin.com/in/jameslimbj">LinkedIn</a>
 </p>
-<p>)HTML";
-
-constexpr std::string_view kPageTail = R"HTML( views since server restarted.</p>
 </html>)HTML";
 
 namespace {
@@ -48,16 +42,9 @@ boost::beast::http::response<boost::beast::http::string_body> make_response(
     response.set(boost::beast::http::field::content_type, "text/plain");
     response.body() = "not found\n";
   } else {
-    const auto count = view_counter.fetch_add(1, std::memory_order_relaxed) + 1;
-    std::string count_str = std::to_string(count); 
-
-    std::string page{};
-    page.reserve(kPageHeader.length() + count_str.length() + kPageTail.length());
-    page.append(kPageHeader).append(count_str).append(kPageTail);
-
     response.result(boost::beast::http::status::ok);
     response.set(boost::beast::http::field::content_type, "text/html; charset=utf-8");
-    response.body() = std::move(page);
+    response.body() = kPage;
   }
 
   const auto len = response.body().size();
