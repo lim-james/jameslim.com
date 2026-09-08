@@ -8,8 +8,6 @@
 #include <thread>
 
 constexpr std::string_view kPage = R"HTML(<!doctype html>
-<html lang="en">
-<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>James Lim</title>
 <h1>James Lim</h1>
@@ -17,8 +15,7 @@ constexpr std::string_view kPage = R"HTML(<!doctype html>
 <p>
 <a href="https://github.com/lim-james">GitHub</a> &middot;
 <a href="https://www.linkedin.com/in/jameslimbj">LinkedIn</a>
-</p>
-</html>)HTML";
+</p>)HTML";
 
 namespace {
 
